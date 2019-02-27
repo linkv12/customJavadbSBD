@@ -1,0 +1,6 @@
+help,help(),Show all command
+create user,create user _username_ identified by _password_ ;,create a user
+grant,grant _privilege_ to _username_ ;,grant privilege to a user
+logout,logout(),logout from current session
+exit,exit(),exit from app
+login,login(),login to db
