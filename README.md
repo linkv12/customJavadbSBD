@@ -1,5 +1,5 @@
 # customJavadbSBD
 original version
 
-use jdk11
+use jdk11"\n"
 use intellij
