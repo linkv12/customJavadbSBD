@@ -1,0 +1,9 @@
+customer,id_customer,nama,alamat,no_telp
+customer,string,string,string,string
+customer,primary_key,none,none,none
+barang,id_barang,nama_barang,harga,jml_stock
+barang,string,string,int,int
+barang,primary_key,none,none,none
+membeli,id_customer,id_barang,tgl_beli,jml_beli
+membeli,string,string,string,int
+membeli,primary_key,primary_key,none,none
