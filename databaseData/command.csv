@@ -4,3 +4,5 @@ grant,grant _privilege_ to _username_ ;,grant privilege to a user
 logout,logout(),logout from current session
 exit,exit(),exit from app
 login,login(),login to db
+select,select *;,print all table
+select,select _tname_;,print table with the name _tname_

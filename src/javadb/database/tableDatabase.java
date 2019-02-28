@@ -1,7 +1,6 @@
 package javadb.database;
 
 import javadb.login.loginDatabase;
-import javadb.login.loginModel;
 
 import java.io.*;
 import java.nio.file.Paths;
@@ -50,16 +49,17 @@ public class tableDatabase {
     }
 
     public void tryOpenTableDatabase (String location,String table_name,String databaseExt) {
+        System.out.println("hey we are in tryOpenTableDatabase");
         try {
-            this.tableBR = new BufferedReader(new FileReader(location+"."+databaseExt));
+            this.tableBR = new BufferedReader(new FileReader(location+table_name+"."+databaseExt));
         } catch (FileNotFoundException e) {
             try {
                 createTableDatabase(tblListlocation,tblListile,databaseExt);
-                this.tableBR = new BufferedReader(new FileReader(location+"."+databaseExt));
+                this.tableBR = new BufferedReader(new FileReader(location+table_name+"."+databaseExt));
             } catch (IOException e1) {
                 //Logger.getLogger(loginDatabase.class.getName()).log(Level.SEVERE, null, e1);
                 System.out.println("Cannot create file");
-                System.exit(1);
+                //System.exit(1);
             }
             //Logger.getLogger(loginDatabase.class.getName()).log(Level.SEVERE, null, e);
             //e.printStackTrace();
@@ -84,15 +84,22 @@ public class tableDatabase {
     }
 
     private tableModel getTableData (String table_name) {
+        settableBR(table_name);
         if (checkTableExist(table_name)) {
             this.settableBR(table_name);
             tableModel temp = new tableModel();
             temp.setTableName(table_name);
+            System.out.println(loadTableDataType_n_KeyFromCSV(table_name).size());
             String[] tableDataType = loadTableDataType_n_KeyFromCSV(table_name).get(1);
+            temp.setkey(loadTableDataType_n_KeyFromCSV(table_name).get(2));
+            //for (String s : loadTableDataType_n_KeyFromCSV(table_name).get(0)) {
+             //   System.out.println("Here is : " + s);
+            //}
             settableBR(table_name);
             List<String> listDatatype = new ArrayList<>();
             for (String s : tableDataType) {
                 listDatatype.add(s);
+                System.out.println(s);
             }
             temp.setDataType(listDatatype);
             temp.setTableContent(loadTableContentFromCSV(table_name));
@@ -137,32 +144,30 @@ public class tableDatabase {
     }
 
     public List<String[]> loadTableDataType_n_KeyFromCSV (String table_name) {
-        if (tableListBR == null) {
-            tryOpenTableListDatabase();
-        } else {
-            System.out.println("failed to open dir");
-            return null;
-        }
+        tryOpenTableListDatabase();
         List<String[]> temp_list = new ArrayList<>();
         String temp_strorage;
         try {
             while ((temp_strorage = this.tableListBR.readLine()) != null) {
-                System.out.println(temp_strorage);
+                //System.out.println(temp_strorage);
                 String[] dataTable = temp_strorage.split(",");
                 for (int i = 0; i < dataTable.length ; i++) {
                     dataTable[i] = removePetik(dataTable[i]);
                 }
                 if (dataTable[0].equals(table_name)) {
                     temp_list.add(dataTable);
+                //    for (String s : dataTable) {
+                  //      System.out.println("we're checking : " + s);
+                    //}
                 }
-                for (String[] s : temp_list) {
-                    System.out.print("WTHF MAN : ");
-                    for (String d : s) {
-                        System.out.print(d);
-                        System.out.print("-");
-                    }
-                    System.out.println("\n");
-                }
+                //for (String[] s : temp_list) {
+                //    System.out.print("WTHF MAN : ");
+                 //   for (String d : s) {
+                   //     System.out.print(d);
+                     //  System.out.print("-");
+                    //}
+                    //System.out.println("");
+                //}
             }
             return temp_list;
         } catch (IOException e) {
@@ -185,14 +190,18 @@ public class tableDatabase {
         }
     }
 
-    public List loadTableContentFromCSV (String table_name) {
-        List  temp_list = new ArrayList<>();
+    public List<String[]> loadTableContentFromCSV (String table_name) {
+        List<String[]> temp_list = new ArrayList<>();
         String temp_strorage;
         try {
             while ((temp_strorage = this.tableBR.readLine()) != null) {
                 String[] dataTableName = temp_strorage.split(",");
                 for (int i = 0; i < dataTableName.length ; i++) {
                     dataTableName[i] = removePetik(dataTableName[i]);
+                    //System.out.println(dataTableName[i]);
+                }
+                for (String g : dataTableName) {
+                    System.out.println(g);
                 }
                 temp_list.add(dataTableName);
             }
@@ -207,16 +216,16 @@ public class tableDatabase {
         System.out.println("thiss run 1");
         tableDatabase x = new tableDatabase();
         System.out.println("thiss run 2");
-        List<String[]> y = x.loadTableDataType_n_KeyFromCSV("customer");
+        List<String[]> y = x.loadTableDataType_n_KeyFromCSV("barang");
         System.out.println("thiss run 3");
-        for (String[] s : y) {
-            System.out.print("WTHF MAN : ");
-            for (String d : s) {
-                System.out.print(d);
-                System.out.print("-");
-            }
-            System.out.println("\n");
+        tableModel z = x.getTableData("barang");
+        List<String[]> alpha = z.getTableContent();
+        System.out.println("this now iterating data");
+        for (String[] bta : alpha) {
+            for (String che : bta)
+                System.out.println(che);
         }
         System.out.println("thiss run 4");
+
     }
 }

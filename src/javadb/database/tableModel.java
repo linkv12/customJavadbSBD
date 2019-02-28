@@ -6,8 +6,8 @@ import java.util.List;
 public class tableModel {
     private String tableName;
     private List<String> dataType;
-    private int idxPK, idxFK;
-    private List tableContent;
+    private String[] key;
+    private List<String[]> tableContent;
 
 
     public tableModel() {
@@ -29,27 +29,19 @@ public class tableModel {
         this.dataType = dataType;
     }
 
-    public int getIdxPK() {
-        return idxPK;
+    public String[] getkey() {
+        return key;
     }
 
-    public void setIdxPK(int idxPK) {
-        this.idxPK = idxPK;
+    public void setkey(String[] key) {
+        this.key = key;
     }
 
-    public int getIdxFK() {
-        return idxFK;
-    }
-
-    public void setIdxFK(int idxFK) {
-        this.idxFK = idxFK;
-    }
-
-    public List getTableContent() {
+    public List<String[]>  getTableContent() {
         return tableContent;
     }
 
-    public void setTableContent(List tableContent) {
+    public void setTableContent(List<String[]> tableContent) {
         this.tableContent = tableContent;
     }
 }

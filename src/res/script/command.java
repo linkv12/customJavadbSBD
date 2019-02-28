@@ -127,13 +127,20 @@ public class command {
                 } catch (Exception e) {
                     System.out.println("failed...");
                 }
+            } else if (parsedCommandList[0].equalsIgnoreCase("select")) {
+                if (parsedCommandList.equals("*")) {
+                    // will print all table
+
+                } else {
+                    // will print a table with t_name
+                }
             }
         }
     }
 
     public static void main(String[] args) {
         command x = new command();
-        //x.loadCommand();
+        x.loadCommand();
         x.execHelp();
         System.out.println("-----------------------------EOF");
     }
