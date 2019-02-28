@@ -1,5 +1,6 @@
 package res.script;
 
+import javadb.database.tableDatabase;
 import javadb.login.loginDatabase;
 import javadb.login.loginModel;
 import javadb.user.userDatabase;
@@ -128,11 +129,12 @@ public class command {
                     System.out.println("failed...");
                 }
             } else if (parsedCommandList[0].equalsIgnoreCase("select")) {
-                if (parsedCommandList.equals("*")) {
+                if (parsedCommandList[1].equals("*")) {
                     // will print all table
-
+                    new tableDatabase().printAllTable();
                 } else {
                     // will print a table with t_name
+                    new tableDatabase().printTable(parsedCommandList[1]);
                 }
             }
         }

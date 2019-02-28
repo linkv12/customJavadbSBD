@@ -22,6 +22,9 @@ public class tableDatabase {
     private String tableDatalocation = Paths.get(".").toAbsolutePath().normalize().toString()+"/databaseData/tables/";
     private String templateTableDatalocation = Paths.get(".").toAbsolutePath().normalize().toString()+"/databaseData/tables/";
 
+    public tableDatabase() {
+        tryOpenTableListDatabase();
+    }
 
     public void setTableDatalocation(String tbl_name) {
         this.tableDatalocation = this.templateTableDatalocation + tbl_name + "."+databaseExt;
@@ -226,6 +229,36 @@ public class tableDatabase {
                 System.out.println(che);
         }
         System.out.println("thiss run 4");
+
+    }
+
+    public void printTable(String s) {
+
+
+        System.out.println();
+    }
+
+    public void printAllTable() {
+        List<String> table_name_list = loadTableNameFromCSV();
+        String[] all_table_name = new String[(table_name_list.size()/3)];
+        int idx = 0;
+        for (String s : table_name_list) {
+
+            if (idx == 0) {
+                all_table_name[0] = s;
+                System.out.println(all_table_name[idx]);
+                idx++;
+            } else {
+                if (!(all_table_name[idx-1].equalsIgnoreCase(s))) {
+                    all_table_name[idx] = s;
+                    System.out.println(all_table_name[idx]);
+                    idx++;
+                }
+            }
+        }
+        for (String tname : all_table_name) {
+            printTable(tname);
+        }
 
     }
 }
