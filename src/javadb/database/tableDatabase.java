@@ -233,8 +233,23 @@ public class tableDatabase {
     }
 
     public void printTable(String s) {
+        tableModel table_to_print = getTableData(s);
+        System.out.println(table_to_print.getTableName());
+        printXine("-");
+        for (String[] SArray : table_to_print.getTableContent()) {
+            for (String ss : SArray) {
+                System.out.print(ss + "\t");
+            }
+            System.out.println();
+        }
+        //printHeaderColumn();
+        System.out.println();
+    }
 
-
+    private void printXine(String s) {
+        for (int i = 0; i <= 49; i++) {
+            System.out.print(s);
+        }
         System.out.println();
     }
 
@@ -246,17 +261,18 @@ public class tableDatabase {
 
             if (idx == 0) {
                 all_table_name[0] = s;
-                System.out.println(all_table_name[idx]);
+                //System.out.println(all_table_name[idx]);
                 idx++;
             } else {
                 if (!(all_table_name[idx-1].equalsIgnoreCase(s))) {
                     all_table_name[idx] = s;
-                    System.out.println(all_table_name[idx]);
+                    //System.out.println(all_table_name[idx]);
                     idx++;
                 }
             }
         }
         for (String tname : all_table_name) {
+            System.out.println(tname);
             printTable(tname);
         }
 
